@@ -17,6 +17,24 @@ jobs:
       matrix:
         otp: ["25.0.4"]
         elixir: ["1.14.2"]
+    services:
+      postgres:
+        image: postgres:14
+        ports:
+          - 6661:5432
+        env:
+          POSTGRES_PASSWORD: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 1s
+          --health-timeout 1s
+          --health-retries 30
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 6662:3306
+        env:
+          MYSQL_ROOT_PASSWORD: mysql
 
     steps:
       - name: Set up Elixir
@@ -52,4 +70,25 @@ jobs:
       - run: mix deps.get
       - run: mix deps.compile
       - run: mix format --check-formatted
+
+      # # just before tests we try waiting on containers, at this moment they are probably already up and running
+      # - name: psql_wait
+      #   run: |
+      #     set -o errexit;
+      #     c=0;
+      #     for i in `seq 30`; do
+      #       echo "psql_wait"
+      #       psql --host localhost --username postgres --dbname template1 -c 'select * from information_schema.tables;' > /dev/null && c=0 && break || c=$? && sleep 1
+      #     done;
+      #     exit $c
+
+      # - name: mysql_wait
+      #   run: |
+      #     set -o errexit;
+      #     c=0;
+      #     for i in `seq 30`; do
+      #       echo "mysql_wait"
+      #       mysql --execute 'select * from information_schema.tables;' > /dev/null > /dev/null && c=0 && break || c=$? && sleep 1
+      #     done;
+      #     exit $c
       - run: mix test
