@@ -8,7 +8,7 @@ defmodule DbReflect.Driver.Mysql do
         password: "mysql",
         port: 6662,
         hostname: "127.0.0.1",
-        database: "mysql",
+        database: "db_reflect",
         protocol: :tcp
       )
 

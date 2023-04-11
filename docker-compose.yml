@@ -5,8 +5,10 @@ services:
     image: postgres:14.1-alpine
     restart: always
     environment:
+      - POSTGRES_DB=db_reflect
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+
     ports:
       - "6661:5432"
     volumes:
@@ -17,7 +19,9 @@ services:
     image: mysql:8.0
     restart: always
     environment:
+      - MYSQL_DATABASE=db_reflect
       - MYSQL_ROOT_PASSWORD=mysql
+
     ports:
       - "6662:3306"
     volumes:

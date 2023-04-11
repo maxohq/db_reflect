@@ -1,22 +1,14 @@
 defmodule DbReflect.Driver.Psql do
   def start do
     ensure_started()
-    # {:ok, pid} =
-    #   Postgrex.start_link(
-    #     hostname: "127.0.0.1",
-    #     username: "postgres",
-    #     password: "postgres",
-    #     database: "postgres",
-    #     port: "6661"
-    #   )
 
     {:ok, pid} =
       Postgrex.start_link(
-        hostname: "localhost",
+        hostname: "127.0.0.1",
         username: "postgres",
         password: "postgres",
-        database: "postgres",
-        port: "5432"
+        database: "db_reflect",
+        port: "6661"
       )
 
     pid
