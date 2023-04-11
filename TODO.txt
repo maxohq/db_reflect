@@ -1,0 +1,13 @@
+
+- https://github.com/vrana/adminer/blob/master/adminer/drivers/pgsql.inc.php
+
+
+Running MySQL
+- https://severalnines.com/wp-content/uploads/2022/05/mysql_on_docker_how_to_containerize_your_database.pdf
+- https://hub.docker.com/_/mysql
+- https://earthly.dev/blog/docker-mysql/
+
+
+Adminer
+- https://www.cloudways.com/blog/adminer-vs-phpmyadmin/
+- https://www.adminer.org/en/
