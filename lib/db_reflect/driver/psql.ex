@@ -17,21 +17,30 @@ defmodule DbReflect.Driver.Psql do
     end
   end
 
+  def queries do
+    # - https://github.com/vrana/adminer/blob/master/adminer/drivers/pgsql.inc.php
+    # SELECT datname FROM pg_database WHERE has_database_privilege(datname, 'CONNECT') ORDER BY datname
+  end
+
   def check(pid) do
-    Postgrex.query!(
+    query!(pid, "drop table if exists comments")
+    query!(pid, "create table comments(id serial primary key not null, text varchar)")
+    query!(pid, "insert into comments(text) values('first!')")
+    query!(pid, "SELECT * FROM comments")
+
+    query!(
       pid,
-      "drop table if exists comments;",
-      []
+      "SELECT datname FROM pg_database WHERE has_database_privilege(datname, 'CONNECT') ORDER BY datname"
     )
 
-    Postgrex.query!(
+    query!(
       pid,
-      "create table comments(id serial primary key not null, text varchar)",
-      []
+      "SELECT *, table_name, table_type FROM information_schema.tables where table_schema = 'public'"
     )
+  end
 
-    Postgrex.query!(pid, "insert into comments(text) values('first!')", [])
-    Postgrex.query!(pid, "SELECT * FROM comments", [])
+  def query!(pid, sql, args \\ []) do
+    Postgrex.query!(pid, sql, args)
   end
 
   defp ensure_started do

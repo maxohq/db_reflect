@@ -18,21 +18,24 @@ defmodule DbReflect.Driver.Mysql do
     end
   end
 
+  def queries do
+    # https://github.com/vrana/adminer/blob/master/adminer/drivers/mysql.inc.php
+  end
+
   def check(pid) do
-    MyXQL.query!(
+    query!(pid, "drop table if exists comments;")
+
+    query!(
       pid,
-      "drop table if exists comments;",
-      []
+      "create table if not exists comments(id int primary key not null auto_increment, text varchar(100))"
     )
 
-    MyXQL.query!(
-      pid,
-      "create table if not exists comments(id int primary key not null auto_increment, text varchar(100))",
-      []
-    )
+    query!(pid, "insert into comments(text) values('first!')", [])
+    query!(pid, "SELECT * FROM comments", [])
+  end
 
-    MyXQL.query!(pid, "insert into comments(text) values('first!')", [])
-    MyXQL.query!(pid, "SELECT * FROM comments", [])
+  def query!(pid, sql, args \\ []) do
+    MyXQL.query!(pid, sql, args)
   end
 
   defp ensure_started do

@@ -15,4 +15,12 @@ defmodule DbReflect.Driver.Sqlite do
     {:ok, conn3} = Exqlite.Basic.open("file:boom?mode=memory&cache=shared")
     Exqlite.Basic.exec(conn3, "select * from test")
   end
+
+  # - https://github.com/vrana/adminer/blob/master/adminer/drivers/sqlite.inc.php
+  # PRAGMA table_info(users);
+  # SELECT * FROM sqlite_master;
+  # PRAGMA index_list(users);
+  # PRAGMA foreign_key_list(users);
+  def queries do
+  end
 end
