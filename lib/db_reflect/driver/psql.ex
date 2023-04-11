@@ -1,15 +1,28 @@
 defmodule DbReflect.Driver.Psql do
+  def params do
+    [
+      hostname: "127.0.0.1",
+      username: "postgres",
+      password: "postgres",
+      database: "db_reflect",
+      port: "6661"
+    ]
+  end
+
   def start do
     ensure_started()
 
-    {:ok, pid} =
-      Postgrex.start_link(
-        hostname: "127.0.0.1",
-        username: "postgres",
-        password: "postgres",
-        database: "db_reflect",
-        port: "6661"
-      )
+    with {:ok, pid} <- Postgrex.start_link(params()) do
+      {:ok, pid}
+    end
+  end
+
+  def check(pid) do
+    Postgrex.query!(
+      pid,
+      "drop table if exists comments;",
+      []
+    )
 
     Postgrex.query!(
       pid,
@@ -19,8 +32,6 @@ defmodule DbReflect.Driver.Psql do
 
     Postgrex.query!(pid, "insert into comments(text) values('first!')", [])
     Postgrex.query!(pid, "SELECT * FROM comments", [])
-
-    pid
   end
 
   defp ensure_started do

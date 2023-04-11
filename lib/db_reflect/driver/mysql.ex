@@ -1,16 +1,29 @@
 defmodule DbReflect.Driver.Mysql do
+  def params do
+    [
+      username: "root",
+      password: "mysql",
+      port: 6662,
+      hostname: "127.0.0.1",
+      database: "db_reflect",
+      protocol: :tcp
+    ]
+  end
+
   def start do
     ensure_started()
 
-    {:ok, pid} =
-      MyXQL.start_link(
-        username: "root",
-        password: "mysql",
-        port: 6662,
-        hostname: "127.0.0.1",
-        database: "db_reflect",
-        protocol: :tcp
-      )
+    with {:ok, pid} <- MyXQL.start_link(params()) do
+      {:ok, pid}
+    end
+  end
+
+  def check(pid) do
+    MyXQL.query!(
+      pid,
+      "drop table if exists comments;",
+      []
+    )
 
     MyXQL.query!(
       pid,
@@ -20,8 +33,6 @@ defmodule DbReflect.Driver.Mysql do
 
     MyXQL.query!(pid, "insert into comments(text) values('first!')", [])
     MyXQL.query!(pid, "SELECT * FROM comments", [])
-
-    pid
   end
 
   defp ensure_started do
