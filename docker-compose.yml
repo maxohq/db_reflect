@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  ####### Postgres
+  psql:
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "6661:5432"
+    volumes:
+      - psql:/var/lib/postgresql/data
+
+  ####### MySQL
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+    ports:
+      - "6662:3306"
+    volumes:
+      - mysql:/var/lib/mysql
+
+  ####### ADMIN UI
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+### Volumes config
+volumes:
+  psql:
+    driver: local
+  mysql:
+    driver: local
