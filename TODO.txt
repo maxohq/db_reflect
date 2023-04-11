@@ -11,3 +11,9 @@ Running MySQL
 Adminer
 - https://www.cloudways.com/blog/adminer-vs-phpmyadmin/
 - https://www.adminer.org/en/
+
+## For research:
+- https://github.com/knex/knex-schema-inspector/blob/master/lib/dialects/sqlite.ts
+- https://github.com/volatiletech/sqlboiler
+- https://www.youtube.com/watch?v=iiJuM9NR8No -SQLBoiler - Advanced Queries
+
