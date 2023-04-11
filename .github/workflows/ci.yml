@@ -20,10 +20,13 @@ jobs:
     services:
       postgres:
         image: postgres:14
-        ports:
-          - 6661:5432
         env:
+          POSTGRES_DB: db_reflect
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
+
+        ports:
+          - "6661:5432"
         options: >-
           --health-cmd pg_isready
           --health-interval 1s
@@ -31,10 +34,12 @@ jobs:
           --health-retries 30
       mysql:
         image: mysql:8.0
-        ports:
-          - 6662:3306
         env:
+          MYSQL_DATABASE: db_reflect
           MYSQL_ROOT_PASSWORD: mysql
+
+        ports:
+          - "6662:3306"
 
     steps:
       - name: Set up Elixir
