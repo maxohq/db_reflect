@@ -12,6 +12,15 @@ defmodule DbReflect.Driver.Mysql do
         protocol: :tcp
       )
 
+    MyXQL.query!(
+      pid,
+      "create table if not exists comments(id int primary key not null auto_increment, text varchar(100))",
+      []
+    )
+
+    MyXQL.query!(pid, "insert into comments(text) values('first!')", [])
+    MyXQL.query!(pid, "SELECT * FROM comments", [])
+
     pid
   end
 
