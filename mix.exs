@@ -46,10 +46,20 @@ defmodule DbReflect.MixProject do
   defp deps do
     [
       {:maxo_adapt, "~> 0.1"},
+
+      # DB drivers
       {:postgrex, "~> 0.17", optional: true},
       {:myxql, "~> 0.6.3", optional: true},
       {:exqlite, "~> 0.13", optional: true},
-      {:ex_doc, "~> 0.29", only: :dev, runtime: false},
+
+      # Dev tools
+      {:ex_check, "~> 0.15", only: [:dev], runtime: false},
+      {:credo, ">= 0.0.0", only: [:dev], runtime: false},
+      {:dialyxir, ">= 0.0.0", only: [:dev], runtime: false},
+      {:doctor, ">= 0.0.0", only: [:dev], runtime: false},
+      {:ex_doc, ">= 0.0.0", only: [:dev], runtime: false},
+
+      # Testing tools
       {:maxo_test_iex, "~> 0.1", only: [:test]},
       {:mneme, "~> 0.3", only: [:test]}
     ]
