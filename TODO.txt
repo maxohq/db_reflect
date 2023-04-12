@@ -17,3 +17,20 @@ Adminer
 - https://github.com/volatiletech/sqlboiler
 - https://www.youtube.com/watch?v=iiJuM9NR8No -SQLBoiler - Advanced Queries
 
+
+
+## Queries 
+- https://www.openmymind.net/Elixir-Without-Ecto/
+- https://www.openmymind.net/Elixir-Without-Ecto-Dynamic-Queries/
+- https://gist.github.com/karlseguin/f00417db62d1e4b45d6b37925abc1142
+
+
+
+
+## Ideas:
+- https://github.com/elixir-sqlite/ecto_sqlite3/blob/main/lib/ecto/adapters/sqlite3/data_type.ex
+- https://github.com/plausible/ch/blob/master/test/ch/settings_test.exs
+- https://gitlab.com/bunsan1/archeometer/-/tree/main/lib/archeometer/query
+
+
+- https://elixirforum.com/t/generate-sql-prepared-statements-from-ecto-query/40247/3

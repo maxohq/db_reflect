@@ -3,6 +3,6 @@ defmodule DbReflectTest do
   use MnemeDefaults
 
   test "greeting" do
-    auto_assert("Welcome to Maxo!" <- DbReflect.greeting())
+    auto_assert({:ok, %Session{id: 2, source: "mysql"}} <- DbReflect.greeting())
   end
 end
