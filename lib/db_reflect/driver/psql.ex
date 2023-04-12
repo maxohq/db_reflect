@@ -11,10 +11,7 @@ defmodule DbReflect.Driver.Psql do
 
   def start do
     ensure_started()
-
-    with {:ok, pid} <- Postgrex.start_link(params()) do
-      {:ok, pid}
-    end
+    Postgrex.start_link(params())
   end
 
   def queries do

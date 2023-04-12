@@ -1,5 +1,5 @@
 defmodule SessionRepo do
-  use Adapter
+  use MaxoAdapt, default: SessionRepo.Psql
 
   # Define the adapter behavior
   behaviour do

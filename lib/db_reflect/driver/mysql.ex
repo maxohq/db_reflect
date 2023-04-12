@@ -12,10 +12,7 @@ defmodule DbReflect.Driver.Mysql do
 
   def start do
     ensure_started()
-
-    with {:ok, pid} <- MyXQL.start_link(params()) do
-      {:ok, pid}
-    end
+    MyXQL.start_link(params())
   end
 
   def queries do

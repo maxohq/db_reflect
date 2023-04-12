@@ -45,9 +45,7 @@ defmodule DbReflect.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:adapter, git: "https://github.com/IanLuites/adapter"},
-      # {:adapter, path: "deps/adapter"},
-      {:adapter, github: "mindreframer/adapter"},
+      {:maxo_adapt, "~> 0.1"},
       {:postgrex, "~> 0.17", optional: true},
       {:myxql, "~> 0.6.3", optional: true},
       {:exqlite, "~> 0.13", optional: true},
